@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<div id="dogData">
+			<p></p>
+			<button>Click me to load data from the dogs api</button>
+		</div>
+		<hr />
+		
+		
+		
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script>
+			// https://kinduff.github.io/dog-api/
+			//http://jsonblob.com//api/jsonBlob/946801728372883456
+			$(document).on('click','#dogData > button',()=>{
+				
+				$.getJSON('http://jsonblob.com/api/jsonBlob/946801728372883456',function(data){
+					console.log(data);
+				});
+			
+			});
+		</script>
+	</body>
+</html>
