@@ -3,21 +3,66 @@
 	<head>
 	</head>
 	<body>
-		<div id="dogData">
+		<h1>GET</h1>
+		<div id="getData">
 			<p></p>
 			<button>Click me to load data from the dogs api</button>
 		</div>
 		<hr />
 		
-		
+		<h1>POST</h1>
+		<form id="postData">
+			<label>Enter dog name</label><br />
+			<input type="text" name="name" /><br/><br /> 
+			<button type="submit">Click me to create a new database</button>
+		</div>
 		
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script>
 			// https://kinduff.github.io/dog-api/
 			//http://jsonblob.com//api/jsonBlob/946801728372883456
-			$(document).on('click','#dogData > button',()=>{
+			$(document).on('click','#getData > button',()=>{
+				console.log('Making get request....');
+				console.log('using getJSON');
+				//using getJSON
 				$.getJSON('https://jsonblob.com/api/jsonBlob/946801728372883456',function(data){
 					console.log(data);
+				});
+				
+				//using ajax
+				console.log('using ajax');
+				$.ajax({
+					url:'https://jsonblob.com/api/jsonBlob/946801728372883456',
+					type:'GET',
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function (data) {
+						console.log(data);
+					},
+					error: function (error) {
+						console.log(error);
+					}
+				});
+			});
+			
+			
+			$(document).on('submit','#postData',function(e){
+				e.preventDefault();
+				$.ajax({
+					url:'https://jsonblob.com/api/jsonBlob',
+					type:'POST',
+					data: JSON.stringify({
+						name:$('#postData input[name=name]').val()
+					}),
+					contentType: "application/json; charset=utf-8",
+					dataType:'json',
+					success: function (response, status, xhr) {
+						console.log(response);
+						console.log(xhr.getResponseHeader('Location'));
+					},
+					error: function (error) {
+						console.log(error);
+					}
 				});
 			});
 		</script>
